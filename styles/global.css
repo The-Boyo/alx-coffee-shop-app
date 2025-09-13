@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.my-custom-white {
+		@apply text-[rgba(249,249,249,1)];
+	}
+	.my-custom-faded-text {
+		@apply text-[rgba(249,249,249,.5)];
+	}
+}
