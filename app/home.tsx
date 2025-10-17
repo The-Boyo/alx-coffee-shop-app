@@ -9,8 +9,17 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { AntDesign, Entypo, FontAwesome5 } from "@expo/vector-icons";
+import {
+	AntDesign,
+	Entypo,
+	Feather,
+	FontAwesome5,
+	Foundation,
+	Octicons,
+	SimpleLineIcons,
+} from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import { useState } from "react";
 
 interface Coffee {
 	image: string;
@@ -26,7 +35,7 @@ interface Coffee {
 
 const coffees: Coffee[] = [
 	{
-		image: "mocha",
+		image: require("../assets/images/mocha.png"),
 		id: 1,
 		name: "Caffe Mocha",
 		type: "Deep Foam",
@@ -38,7 +47,7 @@ const coffees: Coffee[] = [
 		price: "$ 4.53",
 	},
 	{
-		image: "flatwhite",
+		image: require("../assets/images/flatwhite.png"),
 		id: 2,
 		name: "Flat White",
 		type: "Espresso",
@@ -50,7 +59,7 @@ const coffees: Coffee[] = [
 		price: "$ 3.53",
 	},
 	{
-		image: "mocha",
+		image: require("../assets/images/mocha.png"),
 		id: 3,
 		name: "Mocha Fusi",
 		type: "Ice/Hot",
@@ -62,7 +71,7 @@ const coffees: Coffee[] = [
 		price: "$ 7.53",
 	},
 	{
-		image: "panna",
+		image: require("../assets/images/panna.png"),
 		id: 4,
 		name: "Caffe Panna",
 		type: "Deep Foam",
@@ -76,6 +85,8 @@ const coffees: Coffee[] = [
 ];
 
 export default function Home() {
+	const [activeTab, setActiveTab] = useState("home");
+
 	const router = useRouter();
 
 	return (
@@ -114,7 +125,7 @@ export default function Home() {
 					renderItem={({ item }: { item: Coffee }) => (
 						<View className="h-[260px] w-[48%] flex mx-1 my-3 bg-[#faf8f8] rounded-xl p-3">
 							<Image
-								source={require(`@/assets/images/panna.png`)}
+								source={item.image}
 								alt={`${item.name} photo`}
 								className="h-[145px] w-full rounded-xl mb-2"
 							/>
@@ -134,6 +145,34 @@ export default function Home() {
 						</View>
 					)}
 				/>
+			</View>
+			<View className="flex items-center w-full h-[16%] absolute bottom-0 py-8 px-3 bg-white rounded-t-2xl">
+				<View className="flex-row justify-around w-full">
+					<Foundation
+						name="home"
+						size={28}
+						color={activeTab === "home" ? "#C67C4E" : "black"}
+						onPress={() => setActiveTab("home")}
+					/>
+					<Feather
+						name="heart"
+						size={24}
+						color={activeTab === "heart" ? "#C67C4E" : "black"}
+						onPress={() => setActiveTab("heart")}
+					/>
+					<SimpleLineIcons
+						name="handbag"
+						size={24}
+						color={activeTab === "handbag" ? "#C67C4E" : "black"}
+						onPress={() => setActiveTab("handbag")}
+					/>
+					<Octicons
+						name="bell"
+						size={24}
+						color={activeTab === "bell" ? "#C67C4E" : "black"}
+						onPress={() => setActiveTab("bell")}
+					/>
+				</View>
 			</View>
 		</SafeAreaView>
 	);
