@@ -21,7 +21,7 @@ import {
 import { useRouter } from "expo-router";
 import { useState } from "react";
 
-interface Coffee {
+export interface Coffee {
 	image: string;
 	id: number;
 	name: string;
@@ -33,7 +33,7 @@ interface Coffee {
 	price: string;
 }
 
-const coffees: Coffee[] = [
+export const coffees: Coffee[] = [
 	{
 		image: require("../assets/images/mocha.png"),
 		id: 1,
@@ -86,6 +86,7 @@ const coffees: Coffee[] = [
 
 export default function Home() {
 	const [activeTab, setActiveTab] = useState("home");
+	const [coffee, setCoffee] = useState("all");
 
 	const router = useRouter();
 
@@ -111,10 +112,30 @@ export default function Home() {
 			<View className="w-full top-[-30px] px-5">
 				<ScrollView className="h-[40px]">
 					<View className="flex flex-row justify-between">
-						<Text className="text-lg text-center">All Coffee</Text>
-						<Text className="text-lg text-center">Machiato</Text>
-						<Text className="text-lg text-center">Latte</Text>
-						<Text className="text-lg text-center">Americano</Text>
+						<Text
+							className={`text-lg text-center rounded-lg py-1 px-3 ${coffee === "all" ? "bg-[#C67C4E] text-white" : ""}`}
+							onPress={() => setCoffee("all")}
+						>
+							All Coffee
+						</Text>
+						<Text
+							className={`text-lg text-center rounded-lg py-1 px-3 ${coffee === "machiato" ? "bg-[#C67C4E] text-white" : ""}`}
+							onPress={() => setCoffee("machiato")}
+						>
+							Machiato
+						</Text>
+						<Text
+							className={`text-lg text-center rounded-lg py-1 px-3 ${coffee === "latte" ? "bg-[#C67C4E] text-white" : ""}`}
+							onPress={() => setCoffee("latte")}
+						>
+							Latte
+						</Text>
+						<Text
+							className={`text-lg text-center rounded-lg py-1 px-3 ${coffee === "americano" ? "bg-[#C67C4E] text-white" : ""}`}
+							onPress={() => setCoffee("americano")}
+						>
+							Americano
+						</Text>
 					</View>
 				</ScrollView>
 				<FlatList
