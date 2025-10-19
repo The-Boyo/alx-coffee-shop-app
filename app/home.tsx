@@ -15,6 +15,7 @@ import {
 	Feather,
 	FontAwesome5,
 	Foundation,
+	MaterialCommunityIcons,
 	Octicons,
 	SimpleLineIcons,
 } from "@expo/vector-icons";
@@ -95,7 +96,7 @@ export default function Home() {
 			<View className="h-[280px] w-full bg-black  pt-10 px-8">
 				<Text className="my-custom-faded-text text-xl">Location</Text>
 				<Text className="my-custom-white text-2xl align-center">
-					Bilzen, Tanjungbalai <AntDesign name="down" size={10} />
+					Baba dogo, Nairobi <AntDesign name="down" size={10} />
 				</Text>
 				<TextInput
 					className="my-custom-faded-text rounded-xl mt-10 h-[3.5em] w-[17em] text-xl p-4 bg-[#313131]"
@@ -103,7 +104,15 @@ export default function Home() {
 				>
 					<FontAwesome5 name="search" size={25} />
 				</TextInput>
-				<Pressable className="h-[4.3em] w-[4.3em] rounded-xl bg-[#C67C4E] absolute right-4 top-[130px]"></Pressable>
+				<Pressable className="h-[4.3em] w-[4.3em] rounded-xl bg-[#C67C4E] absolute right-4 top-[130px] flex-col justify-center items-center">
+					<MaterialCommunityIcons
+						name="swap-horizontal"
+						size={30}
+						color="white"
+					/>
+					{/* <Ionicons name="search-outline" size={18} color="white" />
+					<Ionicons name="search-outline" size={18} color="white" /> */}
+				</Pressable>
 			</View>
 			<Image
 				source={require("@/assets/images/Banner.png")}
@@ -167,32 +176,52 @@ export default function Home() {
 					)}
 				/>
 			</View>
-			<View className="flex items-center w-full h-[16%] absolute bottom-0 py-8 px-3 bg-white rounded-t-2xl">
-				<View className="flex-row justify-around w-full">
-					<Foundation
-						name="home"
-						size={28}
-						color={activeTab === "home" ? "#C67C4E" : "black"}
-						onPress={() => setActiveTab("home")}
-					/>
-					<Feather
-						name="heart"
-						size={24}
-						color={activeTab === "heart" ? "#C67C4E" : "black"}
-						onPress={() => setActiveTab("heart")}
-					/>
-					<SimpleLineIcons
-						name="handbag"
-						size={24}
-						color={activeTab === "handbag" ? "#C67C4E" : "black"}
-						onPress={() => setActiveTab("handbag")}
-					/>
-					<Octicons
-						name="bell"
-						size={24}
-						color={activeTab === "bell" ? "#C67C4E" : "black"}
-						onPress={() => setActiveTab("bell")}
-					/>
+			<View className="flex items-center w-full h-[16%] absolute bottom-0 py-6 px-3 bg-white rounded-t-2xl">
+				<View className="flex-row justify-around w-full h-[50%]">
+					<View className="flex-col items-center justify-around">
+						<Foundation
+							name="home"
+							size={28}
+							color={activeTab === "home" ? "#C67C4E" : "black"}
+							onPress={() => setActiveTab("home")}
+						/>
+						<View
+							className={`h-1.5 w-3 rounded-md bg-[#C67C4E] ${activeTab === "home" ? "visible" : "invisible"}`}
+						></View>
+					</View>
+					<View className="flex-col items-center justify-around">
+						<Feather
+							name="heart"
+							size={24}
+							color={activeTab === "heart" ? "#C67C4E" : "black"}
+							onPress={() => setActiveTab("heart")}
+						/>
+						<View
+							className={`h-1.5 w-3 rounded-md bg-[#C67C4E] ${activeTab === "heart" ? "visible" : "invisible"}`}
+						></View>
+					</View>
+					<View className="flex-col items-center justify-around">
+						<SimpleLineIcons
+							name="handbag"
+							size={24}
+							color={activeTab === "handbag" ? "#C67C4E" : "black"}
+							onPress={() => setActiveTab("handbag")}
+						/>
+						<View
+							className={`h-1.5 w-3 rounded-md bg-[#C67C4E] ${activeTab === "handbag" ? "visible" : "invisible"}`}
+						></View>
+					</View>
+					<View className="flex-col items-center justify-around">
+						<Octicons
+							name="bell"
+							size={24}
+							color={activeTab === "bell" ? "#C67C4E" : "black"}
+							onPress={() => setActiveTab("bell")}
+						/>
+						<View
+							className={`h-1.5 w-3 rounded-md bg-[#C67C4E] ${activeTab === "bell" ? "visible" : "invisible"}`}
+						></View>
+					</View>
 				</View>
 			</View>
 		</SafeAreaView>
