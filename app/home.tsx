@@ -1,6 +1,7 @@
 import {
 	FlatList,
 	Image,
+	ImageSourcePropType,
 	Pressable,
 	ScrollView,
 	Text,
@@ -23,7 +24,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 
 export interface Coffee {
-	image: string;
+	image: ImageSourcePropType;
 	id: number;
 	name: string;
 	type: string;
@@ -156,7 +157,6 @@ export default function Home() {
 						<View className="h-[260px] w-[48%] flex mx-1 my-3 bg-[#faf8f8] rounded-xl p-3">
 							<Image
 								source={item.image}
-								alt={`${item.name} photo`}
 								className="h-[145px] w-full rounded-xl mb-2"
 							/>
 							<Text className="self-start text-xl font-bold">{item.name}</Text>
@@ -166,7 +166,12 @@ export default function Home() {
 									{item.price}
 								</Text>
 								<Pressable
-									onPress={() => router.navigate("/orderDetail")}
+									onPress={() =>
+										router.push({
+											pathname: "/orderDetail",
+											params: { id: item.id },
+										})
+									}
 									className="h-[2.7em] w-[2.7em] rounded-xl bg-[#C67C4E] flex items-center justify-center"
 								>
 									<Entypo name="plus" size={18} color="#fff" />
