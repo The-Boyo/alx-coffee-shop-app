@@ -13,7 +13,7 @@ export default function OrderDetail() {
 	const [item, setItem] = useState<Coffee | undefined>(undefined);
 
 	useEffect(()=> {
-		const gottenItem = coffees.find(coffee=> coffee.id === Number(id))
+		const gottenItem = coffees.find((coffee:Coffee)=> coffee.id === Number(id))
 		setItem(gottenItem)
 	}, [id])
 	
