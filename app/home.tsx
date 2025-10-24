@@ -45,7 +45,7 @@ export const coffees: Coffee[] = [
 		NumberofRatings: 100,
 		size: "Small",
 		description:
-			"a double shot of mocha is exactly 150ml of tea spoon with an exotice well brewed test of Ethiopian coffee brewed along the Nile.",
+			"A double shot of mocha is exactly 150ml of tea spoon with an exotice well brewed test of Ethiopian coffee brewed along the Nile.",
 		price: "$ 4.53",
 	},
 	{
@@ -57,7 +57,7 @@ export const coffees: Coffee[] = [
 		NumberofRatings: 150,
 		size: "Large",
 		description:
-			"a double shot of mocha is exactly 150ml of tea spoon with an exotice well brewed test of Ethiopian coffee brewed along the Nile.",
+			"A double shot of mocha is exactly 150ml of tea spoon with an exotice well brewed test of Ethiopian coffee brewed along the Nile.",
 		price: "$ 3.53",
 	},
 	{
@@ -69,7 +69,7 @@ export const coffees: Coffee[] = [
 		NumberofRatings: 70,
 		size: "Large",
 		description:
-			"a double shot of mocha is exactly 150ml of tea spoon with an exotice well brewed test of Ethiopian coffee brewed along the Nile.",
+			"A double shot of mocha is exactly 150ml of tea spoon with an exotice well brewed test of Ethiopian coffee brewed along the Nile.",
 		price: "$ 7.53",
 	},
 	{
@@ -81,7 +81,7 @@ export const coffees: Coffee[] = [
 		NumberofRatings: 170,
 		size: "Medium",
 		description:
-			"a double shot of mocha is exactly 150ml of tea spoon with an exotice well brewed test of Ethiopian coffee brewed along the Nile.",
+			"A double shot of mocha is exactly 150ml of tea spoon with an exotice well brewed test of Ethiopian coffee brewed along the Nile.",
 		price: "$ 5.53",
 	},
 ];
