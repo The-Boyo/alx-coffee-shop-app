@@ -6,16 +6,17 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Coffee, coffees } from "./home";
 
 export default function OrderDetail() {
+	
 	const router = useRouter();
 	const {id} = useLocalSearchParams();
-
-
+	
+	
 	const [item, setItem] = useState<Coffee | undefined>(undefined);
 
 	useEffect(()=> {
 		const gottenItem = coffees.find((coffee:Coffee)=> coffee.id === Number(id))
 		setItem(gottenItem)
-	}, [id])
+	}, [id, item])
 	
 
 	const renderImage = () => {
@@ -76,14 +77,14 @@ export default function OrderDetail() {
 			<View>
 				<Text className="text-xl font-bold mb-5">Size</Text>
 				<View className="flex-row justify-between">
-					<View className="h-[3.5em] w-[7.5em] flex items-center justify-center border-[rgba(0,0,0,0.2)] border-2 border-solid rounded-2xl">
-						<Text className="text-lg font-bold">S</Text>
+					<View className={`h-[3.5em] w-[7.5em] flex items-center justify-center border-2 border-solid rounded-2xl bg-white ${item.size === 'Small'? 'border-[#C67C4E]': 'border-[rgba(0,0,0,0.2)]'} `}>
+						<Text className={`text-lg font-bold ${item.size === 'Small' ? 'text-[#C67C4E]': ''}`}>S</Text>
 					</View>
-					<View className="h-[3.5em] w-[8em] flex items-center justify-center border-[rgba(0,0,0,0.2)] border-2 border-solid rounded-2xl">
-						<Text className="text-lg font-bold">M</Text>
+					<View className={`h-[3.5em] w-[7.5em] flex items-center justify-center border-2 border-solid rounded-2xl bg-white ${item.size === 'Medium'? 'border-[#C67C4E]': 'border-[rgba(0,0,0,0.2)]'}`}>
+						<Text className={`text-lg font-bold ${item.size === 'Medium' ? 'text-[#C67C4E]': ''}`}>M</Text>
 					</View>
-					<View className="h-[3.5em] w-[8em] flex items-center justify-center border-[rgba(0,0,0,0.2)] border-2 border-solid rounded-2xl">
-						<Text className="text-lg font-bold">L</Text>
+					<View className={`h-[3.5em] w-[7.5em] flex items-center justify-center border-2 border-solid rounded-2xl bg-white ${item.size === 'Large'? 'border-[#C67C4E]': 'border-[rgba(0,0,0,0.2)]'}`}>
+						<Text className={`text-lg font-bold ${item.size === 'Large' ? 'text-[#C67C4E]': ''}`}>L</Text>
 					</View>
 				</View>
 			</View>
