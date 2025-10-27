@@ -168,7 +168,7 @@ export default function Home() {
 								<Pressable
 									onPress={() =>
 										router.push({
-											pathname: "/orderDetail",
+											pathname: "/item",
 											params: { id: item.id },
 										})
 									}
