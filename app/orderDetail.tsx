@@ -30,7 +30,17 @@ export default function OrderDetails () {
 		</View>
 		}
 
-		return <Text>Pick Up</Text>
+		return <View>
+			<Text className="text-xl font-bold mb-3">Pick Up Address</Text>
+			<View className="mb-3">
+				<Text className="text-lg font-bold">Java House, Sarit</Text>
+				<Text className="opacity-40">Sarit Centre, Westlands, Nairobi.</Text>
+			</View>
+			<View>
+				<Text className="text-lg font-bold">Business Note</Text>
+				<Text className="opacity-40">You can use the drive through for a quick grab and go. Thank you!</Text>
+			</View>
+		</View>
 	}
 
 	return <SafeAreaView className="p-2">
@@ -49,6 +59,7 @@ export default function OrderDetails () {
 		</View>
 		{renderAddress()}
 		<View className="w-full h-[1px] bg-[rgba(0,0,0,0.3)] mt-6"></View>
+
 		</View>
 	</SafeAreaView>
 }
