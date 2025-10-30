@@ -1,13 +1,25 @@
 import { AntDesign, Feather, Foundation } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-import { useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { useEffect, useState } from "react";
+import { Image, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Coffee, coffees } from "./home";
 
 export default function OrderDetails () {
 	const [deliveryMode, setDeliveryMode] = useState<'deliver' | 'pick-up'>('deliver');
+	const [theCoffee, setTheCoffee] = useState<Coffee | undefined>(undefined)
 
-	const router = useRouter()
+	const [coffeeOrderCount, setOrderCount] = useState(1);
+
+	const router = useRouter();
+
+	const {id} = useLocalSearchParams();
+	console.log(theCoffee)
+
+	useEffect(()=> {
+		const gottenCoffee = coffees.find((coffee: Coffee)=> coffee.id === Number(id))
+		setTheCoffee(gottenCoffee)
+	}, [theCoffee, id])
 
 	const renderAddress =() => {
 		if(deliveryMode === 'deliver') {
@@ -43,6 +55,53 @@ export default function OrderDetails () {
 		</View>
 	}
 
+	const renderImage = () => {
+		if(!theCoffee) return null;
+
+		let imageSource;
+
+		switch (id) {
+			case "2":
+				imageSource = require("../assets/images/flatwhite.png");
+				break;
+			case "4":
+				imageSource = require("../assets/images/panna.png");
+				break;
+			default:
+				imageSource = require("../assets/images/mocha.png");
+				break;
+		}
+
+		return <Image source={imageSource} resizeMode="cover" className="h-[75px] w-[75px] rounded-lg"/>
+	}
+
+	const renderCoffeeDetails = () => {
+			if(theCoffee) {
+				return <View className="flex-row items-center">
+					{renderImage()}
+					<View className="ml-4">
+						<Text className="text-xl font-bold mb-1">{theCoffee.name}</Text>
+						<Text className="opacity-40">{theCoffee.type}</Text>
+					</View>
+					<View className="absolute right-0 flex-row justify-around min-w-[6em] w-[30%]">
+						<Pressable className="h-[27px] w-[27px] bg-white rounded-full flex justify-center items-center" onPress={()=> {
+							if(coffeeOrderCount <= 1) return
+								setOrderCount(coffeeOrderCount - 1)
+						}}>
+							<AntDesign name="minus" size={16} color="black" />
+						</Pressable>
+						<Text className="font-bold text-lg">{coffeeOrderCount}</Text>
+						<Pressable className="h-[27px] w-[27px] bg-white rounded-full flex justify-center items-center" onPress={()=> {
+							if(coffeeOrderCount >= 20) return
+							setOrderCount(coffeeOrderCount + 1)
+						}}>
+							<AntDesign name="plus" size={16} color="black" />
+						</Pressable>
+					</View>
+				</View>
+			}
+		}
+
 	return <SafeAreaView className="p-2">
 		<View className="px-7 pt-3">
 		<View className='flex-row p-3 mb-6 items-center'>
@@ -59,7 +118,9 @@ export default function OrderDetails () {
 		</View>
 		{renderAddress()}
 		<View className="w-full h-[1px] bg-[rgba(0,0,0,0.3)] mt-6"></View>
-
+		<View className="py-3">
+			{renderCoffeeDetails()}
+		</View>
 		</View>
 	</SafeAreaView>
 }
