@@ -1,4 +1,4 @@
-import { AntDesign, Feather, Foundation } from "@expo/vector-icons";
+import { AntDesign, Feather, Foundation, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Image, Pressable, Text, View } from "react-native";
@@ -14,7 +14,10 @@ export default function OrderDetails () {
 	const router = useRouter();
 
 	const {id} = useLocalSearchParams();
-	console.log(theCoffee)
+
+	//The Discount
+	const discountPrice = 1.0;
+	const originalPrice = 2.0; 
 
 	useEffect(()=> {
 		const gottenCoffee = coffees.find((coffee: Coffee)=> coffee.id === Number(id))
@@ -102,7 +105,7 @@ export default function OrderDetails () {
 			}
 		}
 
-	return <SafeAreaView className="p-2">
+	return <SafeAreaView className="min-h-screen h-full">
 		<View className="px-7 pt-3">
 		<View className='flex-row p-3 mb-6 items-center'>
 			<AntDesign className="" name='left' size={24} color='black' onPress={()=> router.back()} />
@@ -118,8 +121,26 @@ export default function OrderDetails () {
 		</View>
 		{renderAddress()}
 		<View className="w-full h-[1px] bg-[rgba(0,0,0,0.3)] mt-6"></View>
-		<View className="py-3">
+		<View className="py-3 mb-4">
 			{renderCoffeeDetails()}
+		</View>
+		<View className="w-full h-[3px] bg-[#C67C4E] mb-6 opacity-15"></View>
+		<View className="flex-row items-center bg-white h-16 w-full rounded-2xl px-4 mb-5">
+			<MaterialCommunityIcons name="coffee-maker-check" size={24} color="#C67C4E" className="mr-4" />
+			<Text className="font-bold text-lg">1 Discount is Applies</Text>
+			<AntDesign name="right" size={20} color="black" className="absolute right-7" />
+		</View>
+		<View className="mb-6">
+			<Text className="font-bold text-xl mb-4">Payment Summary</Text>
+			<View className="flex-row justify-between mb-3">
+				<Text className="text-lg">Price</Text>
+				<Text className="text-lg font-bold">{theCoffee?.price}</Text>
+			</View>
+			<View className="flex-row">
+				<Text className="text-lg">Delivery Fee</Text>
+				<Text className="text-lg absolute right-14 line-through">${originalPrice}.0</Text>
+				<Text className="text-lg font-bold absolute right-0">${discountPrice}.0</Text>
+			</View>
 		</View>
 		</View>
 	</SafeAreaView>
