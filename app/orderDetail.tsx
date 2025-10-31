@@ -1,4 +1,4 @@
-import { AntDesign, Feather, Foundation, MaterialCommunityIcons } from "@expo/vector-icons";
+import { AntDesign, Feather, Foundation, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Image, Pressable, Text, View } from "react-native";
@@ -10,6 +10,7 @@ export default function OrderDetails () {
 	const [theCoffee, setTheCoffee] = useState<Coffee | undefined>(undefined)
 
 	const [coffeeOrderCount, setOrderCount] = useState(1);
+	const [totalPrice, setTotalPrice] =useState("");
 
 	const router = useRouter();
 
@@ -22,6 +23,10 @@ export default function OrderDetails () {
 	useEffect(()=> {
 		const gottenCoffee = coffees.find((coffee: Coffee)=> coffee.id === Number(id))
 		setTheCoffee(gottenCoffee)
+
+		if(gottenCoffee) {
+			setTotalPrice((Number(gottenCoffee.price.split(" ")[1]) + discountPrice).toFixed(2))
+		}
 	}, [theCoffee, id])
 
 	const renderAddress =() => {
@@ -105,7 +110,7 @@ export default function OrderDetails () {
 			}
 		}
 
-	return <SafeAreaView className="min-h-screen h-full">
+	return <SafeAreaView className="h-full ">
 		<View className="px-7 pt-3">
 		<View className='flex-row p-3 mb-6 items-center'>
 			<AntDesign className="" name='left' size={24} color='black' onPress={()=> router.back()} />
@@ -130,7 +135,7 @@ export default function OrderDetails () {
 			<Text className="font-bold text-lg">1 Discount is Applies</Text>
 			<AntDesign name="right" size={20} color="black" className="absolute right-7" />
 		</View>
-		<View className="mb-6">
+		<View className="mb-3">
 			<Text className="font-bold text-xl mb-4">Payment Summary</Text>
 			<View className="flex-row justify-between mb-3">
 				<Text className="text-lg">Price</Text>
@@ -142,6 +147,24 @@ export default function OrderDetails () {
 				<Text className="text-lg font-bold absolute right-0">${discountPrice}.0</Text>
 			</View>
 		</View>
+		</View>
+		<View className="w-full h-[21%] px-7 pt-5 pb-[8] absolute bottom-0 bg-white rounded-t-3xl">
+			<View className="flex-row items-center mb-2">
+				<Ionicons name="wallet-outline" size={24} color="#C67C4E" className="mr-4" />
+				<View>
+					<Text className="text-lg font-bold">Cash/Wallet</Text>
+					<Text className="text-[#C67C4E] font-bold">${totalPrice}</Text>
+				</View>
+				<AntDesign name="down" size={20} color="black" className="absolute right-7 opacity-65" />
+			</View>
+			<Pressable onPress={()=> {
+				router.push({
+					pathname:'/delivery',
+					params:{id: theCoffee?.id}
+				})
+			}} className="bg-[#C67C4E] w-full h-16 rounded-2xl flex justify-center items-center">
+				<Text className="text-white text-xl font-bold">Order</Text>
+			</Pressable>
 		</View>
 	</SafeAreaView>
 }
